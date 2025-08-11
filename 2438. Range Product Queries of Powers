@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> productQueries(int n, vector<vector<int>>& queries) {
+        int m =  1e9 + 7;
+        vector<int> powers, ans;
+        for(int i = 0; i < 32; i++){
+            if(n & (1 << i))    powers.push_back(1 << i);
+        }
+        for(auto query : queries){
+            int i = query[0];
+            long product = powers[i++];
+            while(i <= query[1]){
+                product = (product* powers[i++]) % m;
+            }
+            ans.push_back(product);
+        }
+        return ans;
+    }
+};
